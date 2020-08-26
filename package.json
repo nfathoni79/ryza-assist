@@ -13,6 +13,7 @@
     "core-js": "^3.6.4",
     "lowdb": "^1.0.0",
     "vue": "^2.6.11",
+    "vue-loading-overlay": "^3.3.2",
     "vue-router": "^3.1.5"
   },
   "devDependencies": {

@@ -95,8 +95,6 @@
             </li>
           </ul>
           <p v-else>No material.</p>
-
-          {{ modal.content }}
         </div>
       </b-modal>
     </div>
@@ -111,11 +109,13 @@ export default {
   name: 'Items',
   components: {
   },
+  props: {
+    categories: Object,
+    items: Object,
+    materials: Object
+  },
   data() {
     return {
-      categories: [],
-      items: [],
-      materials: [],
       form: {
         search: '',
         category: 0,
@@ -131,7 +131,8 @@ export default {
         title: 'Item',
         categories: [],
         materials: []
-      }
+      },
+      // isLoading: false
     }
   },
   methods: {
@@ -211,22 +212,74 @@ export default {
       }
 
       return tableItems
-    }
+    },
+    // selectCategories() {
+    //   let currentSelectCategories = [
+    //     { text: 'Allsdasd', value: 0 }
+    //   ]
+    //
+    //   let sortedCategories = this.categories.sortBy('name')
+    //   // let sortedCategories = this.categories
+    //
+    //   console.log(sortedCategories.size().value())
+    //
+    //   for (let category of sortedCategories) {
+    //     console.log('exist')
+    //     console.log(category.name)
+    //     currentSelectCategories.push({ text: category.name, value: category.id })
+    //   }
+    //
+    //   console.log(currentSelectCategories)
+    //
+    //   return currentSelectCategories
+    // },
+    // selectMaterials() {
+    //   let currentSelectMaterials = [
+    //     { text: 'Allsdfsdf', value: 0 }
+    //   ]
+    //
+    //   let sortedMaterials = this.materials.sortBy('id')
+    //
+    //   let materials = []
+    //
+    //   for (let material of sortedMaterials) {
+    //     if (material.materialableType == 'category') {
+    //       materials.push({
+    //         text: this.categories.find({ id: material.materialableId}).value().name,
+    //         value: material.id
+    //       })
+    //     } else {
+    //       materials.push({
+    //         text: this.items.find({ id: material.materialableId}).value().name,
+    //         value: material.id
+    //       })
+    //     }
+    //   }
+    //
+    //   sortedMaterials = this.$_.sortBy(materials, 'text')
+    //   currentSelectMaterials = [...currentSelectMaterials, ...sortedMaterials]
+    //
+    //   return currentSelectMaterials
+    // }
   },
-  created() {
-    this.categories = this.$db.get('categories')
-    this.items = this.$db.get('items')
-    this.materials = this.$db.get('materials')
-
+  mounted() {
     let sortedCategories = this.categories.sortBy('name')
+    // let sortedCategories = this.categories
 
     for (let category of sortedCategories) {
       this.selectCategories.push({ text: category.name, value: category.id })
     }
 
+    // this.selectMaterials.push({ text: 'Material 1', value: 1 })
+    // this.selectMaterials.push({ text: 'Material 2', value: 2 })
+    // this.selectMaterials.push({ text: 'Material 3', value: 3 })
+
+    // let pseudoSortedMaterials = this.materials.sortBy('id')
+    // let pseudoSortedMaterials = this.materials.value()
+
     let materials = []
 
-    for (let material of this.materials) {
+    for (let material of this.materials.value()) {
       if (material.materialableType == 'category') {
         materials.push({
           text: this.categories.find({ id: material.materialableId}).value().name,
@@ -241,7 +294,7 @@ export default {
     }
 
     let sortedMaterials = this.$_.sortBy(materials, 'text')
-    this.selectMaterials = [...this.selectMaterials, ...sortedMaterials];
+    this.selectMaterials = [...this.selectMaterials, ...sortedMaterials]
   }
 }
 </script>

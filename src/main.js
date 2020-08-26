@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import Loading from 'vue-loading-overlay'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vue-loading-overlay/dist/vue-loading.css'
 
 import App from './App.vue'
 import router from './router'
@@ -11,7 +13,7 @@ import categories from '@/data/categories.js'
 import items from '@/data/items.js'
 import materials from '@/data/materials.js'
 
-var _ = require('lodash');
+var _ = require('lodash')
 
 const low = require('lowdb')
 const LocalStorage = require('lowdb/adapters/LocalStorage')
@@ -29,6 +31,8 @@ db.set('categories', categories).set('items', items).set('materials', materials)
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+Vue.use(Loading)
 
 Vue.prototype.$_ = _
 Vue.prototype.$db = db
