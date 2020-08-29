@@ -1,4 +1,4 @@
-# ryza-trait-v
+# ryza-assist
 
 ## Project setup
 ```
