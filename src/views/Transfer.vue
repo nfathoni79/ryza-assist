@@ -200,7 +200,7 @@ export default {
 
         this.isLoading = false
 
-        console.log('this should be executed after find has been completed')
+        // console.log('this should be executed after find has been completed')
       }
 
       // this.result = this.finder.transferRoutes
@@ -222,7 +222,7 @@ export default {
 
         await this.wait(1000)
 
-        console.log(num)
+        // console.log(num)
 
         return await this.recur(num - 1)
       }
@@ -275,7 +275,7 @@ export default {
 
         this.finder.oneRouteItemIds.pop()
 
-        console.log('finish!')
+        // console.log('finish!')
 
         return true
       }
